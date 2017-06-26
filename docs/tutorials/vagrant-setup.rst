@@ -70,6 +70,8 @@ The Vagrant setup also enables port forwarding that allows your localhost to acc
 - localhost:9093 redirects to rackhd:8443 for secure access to the REST API
 
 
+Set up RackHD in Vagrant on Linux
+-----------------------------------
 There are two kinds of vagrant-based environment. One is used for demo and another is used for developing. How to set up these environments is shown as follows.
 
 .. container:: clearer
@@ -92,11 +94,23 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 .. code::
 
     vagrant up dev
+
+- check whether RackHD is set up successfully.
+
+.. code::
+   
+     vagrant ssh dev
+     sudo service rackhd
+
+If RackHD is set up successfully, the result will be shown as follows.
+
+.. image:: ../_static/check_demo_setup.png
+     :height: 130
+     :align: center
+
 2. Development environment set up
 
 - Clone the RackHD repository
-
-
 
 .. code::
 
@@ -109,6 +123,14 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 
     vagrant up dev_ansible
 
+- check whether RackHD is set up successfully.
+
+If the RackHD is setup successfully, the result will be shown as follows.
+
+.. image:: ../_static/install_src_success.png
+     :height: 150
+     :align: center
+ 
 The logs from RackHD will show in the console window where you invoked this last
 command. You can use control-c (^C) to stop the processes. Additionally you can
 SSH into the local instance using the command ``vagrant ssh dev`` and destroy
@@ -119,4 +141,47 @@ please see the `Vagrant CLI documentation`_.
 
 
 
+Set up RackHD in vagrant on windows
+-----------------------------------
 
+**Prerequisite**
+
+- Ensure your machine has more than 8G physical memory, because RackHD & vNode will use 4G mem. there will be performance impact without enough physical memory.
+
+- Don’t use virtualbox GUI to power on/off/reset the vNode ( quanta_d51). Use vagrant command with “--provision” parameter  (vagrant halt -f quanta_d51 ,      vagrant up quanta_d51 --provision  )
+
+**Steps to set up**
+
+There are two kinds of environments for RackHD running in vagrant. One is used for demo and another is used for development. Steps to set up RackHD for the two kinds environment is similar.
+
+**step 1: Install vagrant & virtualbox on windows**
+
+- https://www.virtualbox.org/wiki/Downloads
+
+- https://www.vagrantup.com/downloads.html
+
+**step 2: Create a Vagrantfile (case sensitive ) in Windows**
+
+If you want to set up demo environment, get code from: https://github.com/RackHD/RackHD/blob/master/example/Vagrantfile. However, you need to edit the code - delete the 89 line:`v.gui=true` 
+ 
+If you want to set up development environment, get code from: https://github.com/yaolingling/ansible_vagrant_install_src
+
+**step 3:  Right mouse click the folder where Vagrantfile lives, to launch “git bash here”**
+
+.. image:: ../_static/git_bash_here.png
+     :height: 450
+     :align: center
+
+**step 4:  In “Git Bash”**
+
+1. Type “vagrant up <vm name>”, to start RackHD VM. Take development environment for example:
+
+.. image:: ../_static/vagrant_up_dev_ansible.png
+     :height: 50
+     :align: center
+
+2. Then, start installing RackHD in vagrant.Take development environemnt for example, the result will be shown as follows if RackHD is setup successfully.
+
+.. image:: ../_static/vagrant_src_rackhd_wins.png
+     :height: 180
+     :align: center
