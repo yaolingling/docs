@@ -17,11 +17,11 @@ Restful API ( v2.0 )
 
 **REST API ( v 2.0) - Get workflow history**
 
-Get the workflow history for a specific node by running the following command. The **<Node_ID>** is retrieved from Lab 3, Step 3.
+Before the following operations are excuted, you need to ssh the vagrant box first. ``vagrant ssh dev`` can enter the demo environment. ``vagrant ssh dev_ansible`` can enter development environment. The **<Node_ID>** is retrieved from 7.2.
 
 .. code::
 
-  curl localhost:9090/api/current/nodes/<Node-ID>/workflows | jq '.' HOL
+  curl localhost:8080/api/current/nodes/<Node-ID>/workflows | jq '.' HOL
 
 .. image:: ../_static/node_workflow.png
      :height: 330
@@ -31,7 +31,7 @@ Get the workflow history for a specific node by running the following command. T
 
 .. code::
 
-   curl localhost:9090/api/current/nodes/<Node-ID>/workflows?active=true | jq '.'
+   curl localhost:8080/api/current/nodes/<Node-ID>/workflows?active=true | jq '.'
 
 In the following example, the return is blank ([]), which means no workflow is actively running on this node.
 
@@ -45,7 +45,7 @@ Show the RackHD configurations, by running the following command.
 
 .. code::
 
- curl localhost:9090/api/2.0/config | jq '.'
+ curl localhost:8080/api/2.0/config | jq '.'
 
 .. image:: ../_static/config_file.png
      :height: 370
@@ -57,7 +57,7 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
 
 .. code::
 
-  curl localhost:9090/api/current/lookups | jq '.'
+  curl localhost:8080/api/current/lookups | jq '.'
 
 .. image:: ../_static/lookup_info.png
    :height: 270
@@ -68,7 +68,7 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
 - Show the name of all build-in workflow
 
 .. code::
-   curl localhost:9090/api/current/workflows/graphs | jq '.' | grep injectableName
+   curl localhost:8080/api/current/workflows/graphs | jq '.' | grep injectableName
 
 As below output example, you will find lots of handy build-in workflow which RackHD carries, which you can leverage them directly.
 
@@ -80,10 +80,10 @@ As below output example, you will find lots of handy build-in workflow which Rac
 
 Post a workflow to a specific node by running the following command.
 
-In the following example, to post a workflow to Reset a Note, the Node_id is obtained by the "curl localhost:9090/api/current/nodes | jq '.' "API.
+In the following example, to post a workflow to Reset a Note, the Node_id is obtained by the "curl localhost:8080/api/current/nodes | jq '.' "API.
 
 .. code::
-  curl -X POST -H 'Content-Type: application/json' 127.0.0.1:9090/api/current/nodes/<Node_id>/workflows?name=Graph.Reset.Node | jq '.'
+  curl -X POST -H 'Content-Type: application/json' 127.0.0.1:8080/api/current/nodes/<Node_id>/workflows?name=Graph.Reset.Node | jq '.'
 
 Then the vNode is powered cycle and rebooted.
 
@@ -91,15 +91,13 @@ Then the vNode is powered cycle and rebooted.
      :height: 330
      :align: center
 
-**Redfish API**
-
 **Redfish API - Chassis**
 
 List the Chassis that is managed by RackHD (equivalent to the enclosure node in REST API 2.0), by running the following command.
 
 .. code::
 
-  curl 127.0.0.1:9090/redfish/v1/Chassis| jq '.'
+  curl 127.0.0.1:8080/redfish/v1/Chassis| jq '.'
 
 
 .. image:: ../_static/redfish_chasis.png
@@ -112,7 +110,7 @@ List the Chassis that is managed by RackHD (equivalent to the enclosure node in 
 
 .. code::
   
- curl 127.0.0.1:9090/redfish/v1/Systems| jq '.'
+ curl 127.0.0.1:8080/redfish/v1/Systems| jq '.'
 
 2. Use the mouse to select the **System-ID** as below example, then the ID will be in your clipboard. This ID will be used in the following steps.
 
@@ -127,7 +125,7 @@ List the SEL Log (System-ID is obtained in the previous step) by running the fol
 
 .. code::
 
-   curl 127.0.0.1:9090/redfish/v1/systems/<System-ID>/LogServices/Sel| jq '.'
+   curl 127.0.0.1:8080/redfish/v1/systems/<System-ID>/LogServices/Sel| jq '.'
 
 .. image:: ../_static/redfish_sel.png
      :height: 290
@@ -141,7 +139,7 @@ Right-click, to paste the System-ID that you copied in a previous step.
 
 .. code::
 
-  curl 127.0.0.1:9090/redfish/v1/Systems/<System-ID>/Processors/0| jq '.'
+  curl 127.0.0.1:8080/redfish/v1/Systems/<System-ID>/Processors/0| jq '.'
 
 .. image:: ../_static/redfish_cpu.png
      :height: 330
@@ -153,7 +151,7 @@ Show the list of RackHD Redfish APIs' by running below command:
 
 .. code::
   
-  curl 127.0.0.1:9090/redfish/v1| jq '.'
+  curl 127.0.0.1:8080/redfish/v1| jq '.'
 
 .. image:: ../_static/redfish_helper.png
      :height: 330

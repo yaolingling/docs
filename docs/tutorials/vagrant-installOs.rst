@@ -4,23 +4,24 @@ Perform an Unattended OS Install
 Summary
 ------------
 
-In this lab, you will leverage RackHD to perform an unattended OS install onto a bare metal server.
+In this section, you will leverage RackHD to perform an unattended OS install onto a bare metal server.
 
-In this lab, the Photon OS is used as the example. It is a minimal Linux container host, optimized to run on VMware platforms. Photon was chosen because it is small enough for the OS installation to take approximately 8 or 9 minutes. The same process that is used in this lab can be used to install other mainstream operating systems, such as Ubuntu, CentOS, and ESXi, which take longer to install.
+In this section, the Photon OS is used as the example. It is a minimal Linux container host, optimized to run on VMware platforms. Photon was chosen because it is small enough for the OS installation to take approximately 8 or 9 minutes. The same process that is used in this lab can be used to install other mainstream operating systems, such as Ubuntu, CentOS, and ESXi, which take longer to install.
 
 Install OS
 -----------------
+Before the following operations are excuted, you need to ssh the vagrant box first. ``vagrant ssh dev`` can enter the demo environment. ``vagrant ssh dev_ansible`` can enter development environment.
 
+Prerequisite
+~~~~~~~~~~~~~
 
-**Step 1. Prerequisite**
-
-1. The quanta_d51 vnode which runs in vagrant is used as the OS-Install target node in this Lab. It's preferred that during the OS installation, to guarantee the performance -- Stop other vnodes during the OS installation . Run "sudo vagrant stop <vnode-name>" to stop other vnodes.
+1. The quanta_d51 vnode which runs in vagrant is used as the OS-Install target node in this Lab. It's preferred that during the OS installation, to guarantee the performance -- Halt other vnodes during the OS installation . Run ``sudo vagrant halt <vnode-name>`` to halt other vnodes.
 
 2. Get the information of vnode.
 
 .. code::
 
-  curl http://localhost:9090/api/current/catalogs | jq '.' | grep D51 -B8 | grep node
+  curl http://localhost:8080/api/current/catalogs | jq '.' | grep D51 -B8 | grep node
 
 .. image:: ../_static/node_info.png
      :height: 250
@@ -33,7 +34,7 @@ Install OS
 
 .. code::
 
-  curl 127.0.0.1:9090/api/current/nodes/<node-id>/obm
+  curl 127.0.0.1:8080/api/current/nodes/<node-id>/obm
 
 In the following example, in the green block, the OBM is configured with the user name of admin.
 
@@ -41,27 +42,32 @@ If the response comes back as [ ], complete the Set the OBM Setting section in 7
 
 5. **Notes**: [Why only "quanta_d51" ]: There were some known issues(kernel panic) about installing PhotonOS on non-Quanta vNode, for RackHD 1.3.x version. So that's why the second step ensures the type is Quanta_D51.
 
-**Step 2. Set Up OS Mirror**
+Set Up OS Mirror
+~~~~~~~~~~~~~~~~
 
 To provision the OS to the node, RackHD can act as an OS mirror repository.
 
-1. enter vagrant box.
+1. Create the following folders
 
-.. code::
-  
-    sudo vagrant ssh dev           # for demo environment
-    sudo vagrant ssh dev_ansible   # for development environment
-
-2. Create the following folders
+For development environment, 
   
 .. code::
 
     sudo su
     cd ~/iso
     mkdir -p /var/mirrors/Photon
-    mkdir -p ~/node_modules/on-http/static/http/mirrors/
+    mkdir -p /home/vagrant/src/on-http/static/http/mirrors/
+
+For demo environment,
+ 
+.. code::
    
-3. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso is already downloaded in ~/iso)
+    sudo su
+    cd ~/iso
+    mkdir -p /var/mirrors/Photon
+    mkdir -p /var/renasar/on-http/static/http/mirrors/
+   
+2. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso is already downloaded in ~/iso)
 
 .. code::
 
@@ -69,7 +75,7 @@ To provision the OS to the node, RackHD can act as an OS mirror repository.
 
 [when prompted , type rackhd as ``password``]
 
-4. Set up a Photon OS install mirror under/var/mirrors/Photon.
+3. Set up a Photon OS install mirror under/var/mirrors/Photon.
 
 .. code::
 
@@ -77,17 +83,16 @@ To provision the OS to the node, RackHD can act as an OS mirror repository.
 
 When prompted, type **rackhd** as the password.
 
-5.The OS mirror will be available on ``http://<IP>:9092/mirrors/Photon`` from vNode's perspective.
+4. The OS mirror will be available on ``http://<IP>:9092/mirrors/Photon`` from vNode's perspective.
 
 .. image:: ../_static/mount_operations.png
     :height: 250
     :align: center
  
-**Step 3. Install OS with RackHD API**
+Install OS with RackHD API
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this step, you will create a payload file, and then leverage the RackHD build-in workflow to install and OS on the vNode.
-
-**Download the Photon payload template**
 
 1. Download the Photon OS install payload example by running the following command. For more payload examples, see example of other OS.
 
@@ -100,8 +105,6 @@ In this step, you will create a payload file, and then leverage the RackHD build
 .. image:: ../_static/wget_iso.png
    :height: 220
    :align: center
-
-**Modify payload file**
 
 2. Modify the payload json file by using vim.
 
@@ -123,23 +126,20 @@ In this step, you will create a payload file, and then leverage the RackHD build
 (2.4) Save and exist vim ( Hit "ESC" key first, then type ":wq" , then hit "Enter")
 
 
-**Send the workflow**
-
 Install the OS by using build-in "InstallPhotonOS" workflow and the ``<node-ID>`` that you obtained in the Prerequisites at the beginning of this lab. Run the following command
 
 .. code::
 
-  curl -X POST -H 'Content-Type: application/json' -d @install_photon_os_payload_minimal.json 127.0.0.1:9090/api/current/nodes/<node-ID>/workflows?name=Graph.InstallPhotonOS | jq '.'
+  curl -X POST -H 'Content-Type: application/json' -d @install_photon_os_payload_minimal.json 127.0.0.1:8080/api/current/nodes/<node-ID>/workflows?name=Graph.InstallPhotonOS | jq '.'
 
-
-**Step 4. Progress**
-
+Installation Progress
+~~~~~~~~~~~~~~~~~~~~~
 
 1. Run the following API to monitor a workflow that is running.
 
 .. code::
 
-  curl 127.0.0.1:9090/api/current/nodes/<Node_ID>/workflows?active=true | jq '.'
+  curl 127.0.0.1:8080/api/current/nodes/<Node_ID>/workflows?active=true | jq '.'
 
 
 In the json output RackHD responses, you will see "_status" field is "running", and "graphName" field is "Install Photon OS",
