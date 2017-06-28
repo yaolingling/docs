@@ -85,7 +85,6 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 .. code::
 
     git clone https://github.com/rackhd/rackhd
-    cd rackhd/example
 
 - Edit the Vagrantfile - delete the line 89: 'v.gui = true'
 
@@ -114,9 +113,8 @@ If RackHD is set up successfully, the result will be shown as follows.
 
 .. code::
 
-    git clone https://github.com/rackhd/rackhd-dev
-    cd rackhd/example
-
+    git clone https://github.com/yaolingling/install_rackhd_ansible
+    
 - Set up a RackHD vagrant instance
 
 .. code::
