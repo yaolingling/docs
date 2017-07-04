@@ -68,6 +68,7 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
 - Show the name of all build-in workflow
 
 .. code::
+   
    curl localhost:8080/api/current/workflows/graphs | jq '.' | grep injectableName
 
 As below output example, you will find lots of handy build-in workflow which RackHD carries, which you can leverage them directly.
