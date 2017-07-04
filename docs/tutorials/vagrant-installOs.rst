@@ -73,21 +73,13 @@ For demo environment,
 
    sudo mount -o loop photon-1.0-13c08b6.iso /var/mirrors/Photon
 
-[when prompted , type rackhd as ``password``]
 
 3. Set up a Photon OS install mirror under/var/mirrors/Photon.
 
 .. code::
 
-   sudo ln -s /var/mirrors/Photon ~/node_modules/on-http/static/http/mirrors/
+   sudo ln -s /var/mirrors/Photon /home/vagrant/src/on-http/static/http/mirrors/
 
-When prompted, type **rackhd** as the password.
-
-4. The OS mirror will be available on ``http://<IP>:9092/mirrors/Photon`` from vNode's perspective.
-
-.. image:: ../_static/mount_operations.png
-    :height: 250
-    :align: center
  
 Install OS with RackHD API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,7 +113,7 @@ In this step, you will create a payload file, and then leverage the RackHD build
 
 .. code::
 
-  "repo": "http://172.31.128.1:9092/mirrors/Photon"
+  "repo": "http://172.31.128.1:9080/mirrors/Photon"
 
 (2.4) Save and exist vim ( Hit "ESC" key first, then type ":wq" , then hit "Enter")
 
