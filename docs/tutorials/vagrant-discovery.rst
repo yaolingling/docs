@@ -1,4 +1,4 @@
-Dynamically Discovery and Catalog Server Nodes
+aynamically Discovery and Catalog Server Nodes
 ===============================================
 
 In this module, you will learn about RackHD's discovery, catalog and poller functionality by using
@@ -84,9 +84,23 @@ For demo environment,
 
 .. code::
   
-    sudo service start rackhd
+    sudo service rackhd start
 
-2. edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`
+2. edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`.
+Then restart rackhd.
+
+For development environment,
+
+.. code::
+
+   sudo pm2 restart /home/vagrant/rackhd-pm2-config.yml
+
+For demo environment,
+
+.. code::
+
+   sudo service rackhd restart
+
 
 3. Wait several seconds, and then type the following RackHD restful API to ensure RackHD is started and is running successfully.
 
@@ -111,7 +125,7 @@ Discovery
   
   sudo vagrant up quanta_d51
 
-2. On the Windows desktop, double-click the UltraVNC Viewer, and connect to <IP>:5901,to view the PXE progress to boot the microkernel
+2. On the Windows desktop, double-click the UltraVNC Viewer, and connect to <IP>:15901,to view the PXE progress to boot the microkernel
 
 .. image:: ../_static/node_discovery_1.png
      :height: 300
@@ -267,8 +281,8 @@ To talk with BMC, RackHD must be configured with the the BMC IP and credentials.
 **Note**: Do not forget to fill the exact <BMC_IP> and <node_id> based on those assigned to your specific nodes.
 
 .. code::
-
- curl -X PUT -H 'Content-Type: application/json' -d ' { "service": "ipmi-obm-service", "config": { "host": "<BMC-IP>", "user": "admin", "password": "admin" } }' 127.0.0.1:8080/api/current/nodes/<node_id>/obm
+   
+   curl -k -X PUT -H 'Content-Type: application/json' -d '{ "nodeId": "<node-id>", "service": "ipmi-obm-service", "config": { "user": "admin", "password": "admin", "host": "<BMC-IP>" } }' localhost:8080/api/2.0/obms
 
 4. Once the OBM credentials have been configured, RackHD can communicate with BMC in workflows (e.g. power-cycle the BMC or retrieve poller data)
 

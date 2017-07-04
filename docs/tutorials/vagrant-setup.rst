@@ -85,8 +85,17 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 .. code::
 
     git clone https://github.com/rackhd/rackhd
+    cd rackhd/example
 
-- Edit the Vagrantfile - delete the line 89: 'v.gui = true'
+- Edit the Vagrantfile 
+  
+  delete the line 89: 'v.gui = true'
+
+  add ``target.vm.box_version = "2.2.0"`` in line 12.
+
+[**Node**] version must be 2.* and the version can be searched in https://app.vagrantup.com/rackhd/boxes/rackhd
+ 
+  
 
 - Set up a RackHD vagrant instance
 
@@ -99,7 +108,7 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 .. code::
    
      vagrant ssh dev
-     sudo service rackhd
+     sudo service rackhd status
 
 If RackHD is set up successfully, the result will be shown as follows.
 
@@ -128,7 +137,9 @@ If the RackHD is setup successfully, the result will be shown as follows.
 .. image:: ../_static/install_src_success.png
      :height: 150
      :align: center
- 
+
+[**Note**] If you want to pull special source code of RackHD, you can edit the line 8 ``code_version: "release/2.1.0"`` of the file **install_rackhd_vagrant.yml**
+
 The logs from RackHD will show in the console window where you invoked this last
 command. You can use control-c (^C) to stop the processes. Additionally you can
 SSH into the local instance using the command ``vagrant ssh dev`` and destroy

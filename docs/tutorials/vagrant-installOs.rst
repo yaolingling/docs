@@ -67,7 +67,7 @@ For demo environment,
     mkdir -p /var/mirrors/Photon
     mkdir -p /var/renasar/on-http/static/http/mirrors/
    
-2. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso is already downloaded in ~/iso)
+2. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso needs to be downloaded in ~/iso)
 
 .. code::
 

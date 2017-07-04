@@ -68,7 +68,7 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
 - Show the name of all build-in workflow
 
 .. code::
-   
+  
    curl localhost:8080/api/current/workflows/graphs | jq '.' | grep injectableName
 
 As below output example, you will find lots of handy build-in workflow which RackHD carries, which you can leverage them directly.
@@ -84,7 +84,8 @@ Post a workflow to a specific node by running the following command.
 In the following example, to post a workflow to Reset a Note, the Node_id is obtained by the "curl localhost:8080/api/current/nodes | jq '.' "API.
 
 .. code::
-  curl -X POST -H 'Content-Type: application/json' 127.0.0.1:8080/api/current/nodes/<Node_id>/workflows?name=Graph.Reset.Node | jq '.'
+ 
+   curl -X POST -H 'Content-Type: application/json' 127.0.0.1:8080/api/current/nodes/<Node_id>/workflows?name=Graph.Reset.Node | jq '.'
 
 Then the vNode is powered cycle and rebooted.
 
