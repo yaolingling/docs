@@ -101,7 +101,7 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 
 .. code::
 
-    vagrant up dev
+    vagrant up dev --provision
 
 - check whether RackHD is set up successfully.
 
@@ -128,7 +128,7 @@ If RackHD is set up successfully, the result will be shown as follows.
 
 .. code::
 
-    vagrant up dev_ansible
+    vagrant up dev_ansible --provision
 
 - check whether RackHD is set up successfully.
 
@@ -175,7 +175,7 @@ There are two kinds of environments for RackHD running in vagrant. One is used f
 
 If you want to set up demo environment, get code from: https://github.com/RackHD/RackHD/blob/master/example/Vagrantfile. However, you need to edit the code - delete the 89 line:`v.gui=true` 
  
-If you want to set up development environment, get code from: https://github.com/yaolingling/ansible_vagrant_install_src
+If you want to set up development environment, get code from: https://github.com/yaolingling/install_rackhd_ansible
 
 **step 3:  Right mouse click the folder where Vagrantfile lives, to launch “git bash here”**
 
@@ -188,7 +188,7 @@ If you want to set up development environment, get code from: https://github.com
 1. Type “vagrant up <vm name>”, to start RackHD VM. Take development environment for example:
 
 .. image:: ../_static/vagrant_up_dev_ansible.png
-     :height: 50
+     :height: 35
      :align: center
 
 2. Then, start installing RackHD in vagrant.Take development environemnt for example, the result will be shown as follows if RackHD is setup successfully.
@@ -196,3 +196,4 @@ If you want to set up development environment, get code from: https://github.com
 .. image:: ../_static/vagrant_src_rackhd_wins.png
      :height: 180
      :align: center
+
