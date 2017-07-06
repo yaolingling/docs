@@ -21,7 +21,7 @@ Before the following operations are excuted, you need to ssh the vagrant box fir
 
 .. code::
 
-  curl localhost:8080/api/current/nodes/<Node-ID>/workflows | jq '.' HOL
+  curl localhost:8080/api/current/nodes/<Node-ID>/workflows | jq '.'
 
 .. image:: ../_static/node_workflow.png
      :height: 330

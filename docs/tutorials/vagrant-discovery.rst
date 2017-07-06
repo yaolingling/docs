@@ -1,4 +1,4 @@
-aynamically Discovery and Catalog Server Nodes
+Dynamically Discovery and Catalog Server Nodes
 ===============================================
 
 In this module, you will learn about RackHD's discovery, catalog and poller functionality by using
@@ -337,7 +337,7 @@ data.
 
 .. code::
 
- curl -X PATCH -H 'Content-Type: application/json' -d '{"pollInterval":15000}' 127.0.0.1:8080/api/current/pollers/<poller_id> HOL
+ curl -X PATCH -H 'Content-Type: application/json' -d '{"pollInterval":15000}' 127.0.0.1:8080/api/current/pollers/<poller_id>
 
 .. image:: ../_static/pollers_info.png
      :height: 350
