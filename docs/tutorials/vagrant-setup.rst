@@ -52,15 +52,15 @@ what we're setting up
 .. _timekeeping: https://www.kernel.org/doc/Documentation/virtual/kvm/timekeeping.txt
 
 
-.. image:: ../_static/vagrant_setup.jpg
+.. image:: ../_static/vagrant_setup.png
      :height: 300
      :align: left
 
 The Vagrant instance sets up a pre-installed RackHD VM that connects to one or more VMs
-that represent managed systems. The target systems are simulated using PXE clients.
+that represent managed systems. The vnode runs in vagrant box which is used to do node discovery and install os on it.
 
-The RackHD VM has two network interfaces. One connects to the local machine via NAT (Network Address Translation)
-and the second connects to the PXE VMs in a private network. The private network is used so that RackHD DHCP and
+The RackHD VM connects the vnode by the private network, **closenet network**, defined in ``Vagrantfile``. The RackHD VM has two network interfaces. One connects to the local machine via NAT (Network Address Translation)
+and the second connects the vnode by a private network. The private network is used so that RackHD DHCP and
 PXE operations are isolated from your local network.
 
 The Vagrant setup also enables port forwarding that allows your localhost to access the RackHD instance:
