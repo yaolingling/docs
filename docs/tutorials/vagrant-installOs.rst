@@ -76,10 +76,17 @@ For demo environment,
 
 3. Set up a Photon OS install mirror under/var/mirrors/Photon.
 
+For development environment,
+
 .. code::
 
    sudo ln -s /var/mirrors/Photon /home/vagrant/src/on-http/static/http/mirrors/
 
+For demo environment,
+
+.. code::
+
+   sudo ln -s /var/mirrors/Photon /var/renasar/on-http/static/http/mirrors/
  
 Install OS with RackHD API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

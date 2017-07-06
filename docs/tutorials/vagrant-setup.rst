@@ -18,7 +18,7 @@ prerequisites
 
     which can also be used with a pager, such as `less`.
 
-You will need to have `Vagrant`_ (>=1.8.1) and `VirtualBox`_ (4.3.x or 5.x.x) installed on your machine to use
+You will need to have `Vagrant`_ (>=1.8.1) and `VirtualBox`_ (4.3.x) installed on your machine to use
 this tutorial.
 
 You may also want to consider installing `jq`_ which provides a command-line
@@ -127,7 +127,8 @@ If RackHD is set up successfully, the result will be shown as follows.
 - Set up a RackHD vagrant instance
 
 .. code::
-
+    
+    cd install_rackhd_ansible
     vagrant up dev_ansible --provision
 
 - check whether RackHD is set up successfully.
