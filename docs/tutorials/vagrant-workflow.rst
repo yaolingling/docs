@@ -184,6 +184,8 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
      :height: 420
      :align: center
 
+``[Note]`` Besides, you need to edit the code block of **Reboot**, as is shown in the picture above.  
+
 18. Select the existing task Boostrap Ubuntu
 
 19. Click the + button.
@@ -329,7 +331,7 @@ Each task also displays the following condition indicators on the right side:
 
 For example, when you connect the green condition indicator of task A to the trigger indicator for Task B: when task A has succeeded, then task B is triggered.
 
-1. Connect the blue condition indicator of the set-boot-pxe task to the trigger indicator of the reboot task: whether the set-boot-pxe task is successful or not, the reboot task is triggered
+1. Connect the green condition indicator of the set-boot-pxe task to the trigger indicator of the reboot task: whether the set-boot-pxe task is successful or not, the reboot task is triggered
 
 .. image:: ../_static/workflow_op19.png
      :height: 180
