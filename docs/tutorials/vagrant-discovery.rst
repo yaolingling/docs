@@ -86,8 +86,7 @@ For demo environment,
   
     sudo service rackhd start
 
-2. edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`.
-Then restart rackhd.
+2. To use RackHD conveniently, the auth function of RackHD can be closed. Just edit ``/opt/monorail/config.json``, set 15 line `"authEnabled": true` to `"authEnabled": false`. Then restart RackHD service.
 
 For development environment,
 
