@@ -19,7 +19,7 @@ prerequisites
     which can also be used with a pager, such as `less`.
 
 You will need to have `Vagrant`_ (>=1.8.1) and `VirtualBox`_ (4.3.x) installed on your machine to use
-this tutorial.
+this tutorial. The 5.1.X `VirtualBox`_ has some problems. So, you are not suggested installing 5.1.x `VirtualBox`_.
 
 You may also want to consider installing `jq`_ which provides a command-line
 oriented tool for pretty printing and filtering JSON structured data.
@@ -89,11 +89,13 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 
 - Edit the Vagrantfile 
   
-  delete the line 89: 'v.gui = true'
+  change the line 79:'sudo service isc-dhcp-server start' to 'sudo service isc-dhcp-server restart'
+
+  change the line 89: 'v.gui = true' to 'v.gui = false'
 
   add ``target.vm.box_version = "2.2.0"`` in line 12.
 
-[**Node**] version must be 2.* and the version can be searched in https://app.vagrantup.com/rackhd/boxes/rackhd
+[**Note**] version must be 2.* and the version can be searched in https://app.vagrantup.com/rackhd/boxes/rackhd
  
   
 
@@ -174,8 +176,14 @@ There are two kinds of environments for RackHD running in vagrant. One is used f
 
 **step 2: Create a Vagrantfile (case sensitive ) in Windows**
 
-If you want to set up demo environment, get code from: https://github.com/RackHD/RackHD/blob/master/example/Vagrantfile. However, you need to edit the code - delete the 89 line:`v.gui=true` 
- 
+If you want to set up demo environment, get code from: https://raw.githubusercontent.com/RackHD/RackHD/master/example/Vagrantfile. However, you need to edit the ``Vagrantfile``.
+
+- change the line 79:’sudo service isc-dhcp-server start’ to ‘sudo service isc-dhcp-server restart’
+
+- change the line 89: ‘v.gui = true’ to ‘v.gui = false’
+
+- add target.vm.box_version = "2.2.0" in line 12. 
+
 If you want to set up development environment, get code from: https://github.com/yaolingling/install_rackhd_ansible
 
 **step 3:  Right mouse click the folder where Vagrantfile lives, to launch “git bash here”**
