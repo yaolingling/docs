@@ -51,7 +51,6 @@ what we're setting up
 
 
 .. image:: ../_static/vagrant_setup.png
-     :height: 300
      :align: left
 
 The Vagrant instance sets up a pre-installed RackHD VM that connects to one or more VMs
@@ -115,7 +114,6 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 If RackHD is set up successfully, the result will be shown as follows.
 
 .. image:: ../_static/check_demo_setup.png
-     :height: 130
      :align: center
 
 **2. Development environment set up**
@@ -138,7 +136,6 @@ If RackHD is set up successfully, the result will be shown as follows.
 If the RackHD is setup successfully, the result will be shown as follows.
 
 .. image:: ../_static/install_src_success.png
-     :height: 150
      :align: center
 
 [**Note**] If you want to pull special source code of RackHD, you can edit the line 8 ``code_version: "release/2.1.0"`` of the file **install_rackhd_vagrant.yml**
@@ -188,8 +185,7 @@ If you want to set up development environment, get code from: https://github.com
 
 **step 3:  Right mouse click the folder where Vagrantfile lives, to launch “git bash here”**
 
-.. image:: ../_static/git_bash_here.png
-     :height: 450
+.. image:: ../_static/git_bash_here.png:
      :align: center
 
 **step 4:  In “Git Bash”**
@@ -197,12 +193,10 @@ If you want to set up development environment, get code from: https://github.com
 1. Type “vagrant up <vm name>”, to start RackHD VM. Take development environment for example:
 
 .. image:: ../_static/vagrant_up_dev_ansible.png
-     :height: 35
      :align: center
 
 2. Then, start installing RackHD in vagrant.Take development environemnt for example, the result will be shown as follows if RackHD is setup successfully.
 
 .. image:: ../_static/vagrant_src_rackhd_wins.png
-     :height: 180
      :align: center
 
