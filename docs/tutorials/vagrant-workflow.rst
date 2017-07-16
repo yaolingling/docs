@@ -10,23 +10,21 @@ For development environment,
 
 .. code::
 
-  mkdir -p /home/vagrant/src/on-http/static/http
-  cd /home/vagrant/src/on-http/static/http/
-  wget https://github.com/RackHD/on-web-ui/archive/gh-pages.zip
-  unzip gh-pages.zip
-  mv on-web-ui-gh-pages on-web-ui
-  cd ~
+  vagrant@rackhd:~$ sudo mkdir -p /home/vagrant/src/on-http/static/http
+  vagrant@rackhd:~$ cd /home/vagrant/src/on-http/static/http/
+  vagrant@rackhd:~$ sudo wget https://github.com/RackHD/on-web-ui/archive/gh-pages.zip
+  vagrant@rackhd:~$ sudo unzip gh-pages.zip
+  vagrant@rackhd:~$ sudo mv on-web-ui-gh-pages on-web-ui
 
 For demo environment,
 
 .. code::
 
-  mkdir -p /var/renasar/on-http/static/http
-  cd /var/renasar/on-http/static/http
-  wget https://github.com/RackHD/on-web-ui/archive/gh-pages.zip
-  unzip gh-pages.zip
-  mv on-web-ui-gh-pages on-web-ui
-  cd ~
+  vagrant@rackhd:~$ sudo mkdir -p /var/renasar/on-http/static/http
+  vagrant@rackhd:~$ cd /var/renasar/on-http/static/http
+  vagrant@rackhd:~$ sudo wget https://github.com/RackHD/on-web-ui/archive/gh-pages.zip
+  vagrant@rackhd:~$ sudo unzip gh-pages.zip
+  vagrant@rackhd:~$ sudo mv on-web-ui-gh-pages on-web-ui
 
 Step 2: Configure on-web-ui
 ----------------------------

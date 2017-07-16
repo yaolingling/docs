@@ -15,32 +15,29 @@ Before the following operations are excuted, you need to ssh the vagrant box fir
 Prerequisite
 ~~~~~~~~~~~~~
 
-1. The quanta_d51 vnode which runs in vagrant is used as the OS-Install target node in this Lab. It's preferred that during the OS installation, to guarantee the performance -- Halt other vnodes during the OS installation . Run ``sudo vagrant halt <vnode-name>`` to halt other vnodes.
-
-2. Get the information of vnode.
+1. The quanta_d51 vnode which runs in vagrant is used as the OS-Install target node in this Lab. Get the information of vnode.
 
 .. code::
 
-  curl http://localhost:8080/api/current/catalogs | jq '.' | grep D51 -B8 | grep node
+  vagrant@rackhd:~$ curl http://localhost:8080/api/current/catalogs | jq '.' | grep D51 -B8 | grep node
 
 .. image:: ../_static/node_info.png
      :height: 250
      :align: center
    
     
-3. Use the mouse to select and copy ``node-id`` text( as shown in the below example snapshot). This ID will be used in the following steps.
+2. Use the mouse to select and copy ``node-id`` text( as shown in the below example snapshot). This ID will be used in the following steps.
 
-4. In RackHD server, ensure its OBM setting is not blank. right click to paste the ``node-id`` text in the following command.
+3. In RackHD server, ensure its OBM setting is not blank. right click to paste the ``node-id`` text in the following command.
 
 .. code::
 
-  curl 127.0.0.1:8080/api/current/nodes/<node-id>/obm
+  vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes/<node-id>/obm
 
 In the following example, in the green block, the OBM is configured with the user name of admin.
 
 If the response comes back as [ ], complete the Set the OBM Setting section in 7.2, to set the OBM setting.
 
-5. **Notes**: [Why only "quanta_d51" ]: There were some known issues(kernel panic) about installing PhotonOS on non-Quanta vNode, for RackHD 1.3.x version. So that's why the second step ensures the type is Quanta_D51.
 
 Set Up OS Mirror
 ~~~~~~~~~~~~~~~~
@@ -53,25 +50,25 @@ For development environment,
   
 .. code::
 
-    sudo su
-    cd ~/iso
-    mkdir -p /var/mirrors/Photon
-    mkdir -p /home/vagrant/src/on-http/static/http/mirrors/
+    vagrant@rackhd:~$ sudo su
+    root@rackhd:/home/vagrant# mkdir iso && iso
+    root@rackhd:/home/vagrant# mkdir -p /var/mirrors/Photon
+    root@rackhd:/home/vagrant# mkdir -p /home/vagrant/src/on-http/static/http/mirrors/
 
 For demo environment,
  
 .. code::
    
-    sudo su
-    cd ~/iso
-    mkdir -p /var/mirrors/Photon
-    mkdir -p /var/renasar/on-http/static/http/mirrors/
+     vagrant@rackhd:~$ sudo su
+     root@rackhd:/home/vagrant# mkdir iso && iso
+     root@rackhd:/home/vagrant# mkdir -p /var/mirrors/Photon
+     root@rackhd:/home/vagrant# mkdir -p /var/renasar/on-http/static/http/mirrors/
    
-2. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso needs to be downloaded in ~/iso)
+2. Create OS mirror from an ISO image by typing below command. (Note: The photon-1.0-13c08b6.iso needs to be downloaded in /home/vagrant/iso)
 
 .. code::
 
-   sudo mount -o loop photon-1.0-13c08b6.iso /var/mirrors/Photon
+   root@rackhd:/home/vagrant/iso# sudo mount -o loop photon-1.0-13c08b6.iso /var/mirrors/Photon
 
 
 3. Set up a Photon OS install mirror under/var/mirrors/Photon.
@@ -80,13 +77,13 @@ For development environment,
 
 .. code::
 
-   sudo ln -s /var/mirrors/Photon /home/vagrant/src/on-http/static/http/mirrors/
+   root@rackhd:/home/vagrant/iso# sudo ln -s /var/mirrors/Photon /home/vagrant/src/on-http/static/http/mirrors/
 
 For demo environment,
 
 .. code::
 
-   sudo ln -s /var/mirrors/Photon /var/renasar/on-http/static/http/mirrors/
+   root@rackhd:/home/vagrant/iso# sudo ln -s /var/mirrors/Photon /var/renasar/on-http/static/http/mirrors/
  
 Install OS with RackHD API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -97,8 +94,7 @@ In this step, you will create a payload file, and then leverage the RackHD build
 
 .. code::
 
-   cd ~/iso
-   wget https://raw.githubusercontent.com/RackHD/RackHD/master/example/samples/install_photon_os_payload_minimal.json
+   root@rackhd:/home/vagrant/iso# wget https://raw.githubusercontent.com/RackHD/RackHD/master/example/samples/install_photon_os_payload_minimal.json
 
 
 .. image:: ../_static/wget_iso.png
@@ -111,7 +107,7 @@ In this step, you will create a payload file, and then leverage the RackHD build
 
 .. code::
 
-  vim install_photon_os_payload_minimal.json
+   root@rackhd:/home/vagrant/iso# vim install_photon_os_payload_minimal.json
 
 
 (2.2) To edit the file using vim, press the i key to enter editing mode. While in editing mode, the vim console displays -- **INSERT** -- in the bottom left.
@@ -129,7 +125,7 @@ Install the OS by using build-in "InstallPhotonOS" workflow and the ``<node-ID>`
 
 .. code::
 
-  curl -X POST -H 'Content-Type: application/json' -d @install_photon_os_payload_minimal.json 127.0.0.1:8080/api/current/nodes/<node-ID>/workflows?name=Graph.InstallPhotonOS | jq '.'
+  root@rackhd:/home/vagrant# curl -X POST -H 'Content-Type: application/json' -d @install_photon_os_payload_minimal.json 127.0.0.1:8080/api/current/nodes/<node-ID>/workflows?name=Graph.InstallPhotonOS | jq '.'
 
 Installation Progress
 ~~~~~~~~~~~~~~~~~~~~~
@@ -138,7 +134,7 @@ Installation Progress
 
 .. code::
 
-  curl 127.0.0.1:8080/api/current/nodes/<Node_ID>/workflows?active=true | jq '.'
+  root@rackhd:/home/vagrant# curl 127.0.0.1:8080/api/current/nodes/<Node_ID>/workflows?active=true | jq '.'
 
 
 In the json output RackHD responses, you will see "_status" field is "running", and "graphName" field is "Install Photon OS",

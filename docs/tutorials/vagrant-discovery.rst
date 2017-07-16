@@ -27,104 +27,148 @@ RackHD and clean up the database so RackHD is forced to discover those nodes aga
      :height: 230
      :align: center
 
-Before the following operations are excuted, you need to ssh the vagrant box first. ``vagrant ssh dev`` can enter the demo environment. ``vagrant ssh dev_ansible`` can enter development environment.
+
+
+``[Note]`` Before the following operations are excuted, you need to ssh the vagrant box first. ``vagrant ssh dev`` can enter the demo environment. ``vagrant ssh dev_ansible`` can enter development environment.
 
 Clean up the database
 ~~~~~~~~~~~~~~~~~~~~~
 
 RackHD uses a Mongo database for storing static data such as catalog information or workflow states.
 
-1. stop rackhd
+**1. For development environment**
 
-For development environment,
-
+- stop rackhd
+ 
 .. code::
-  
-   sudo su
-   pm2 stop /home/vagrant/rackhd-pm2-config.yml
 
-For demo environment,
+   vagrant@rackhd:~$ sudo su
+   root@rackhd:/home/vagrant# pm2 stop /home/vagrant/rackhd-pm2-config.yml
 
-.. code::
-  
-    sudo service rackhd stop
-
-
-2. Clean data base by typing the following command
+- Clean data base by typing the following command
 
 .. code::
     
-   mongo pxe
+   root@rackhd:/home/vagrant# mongo pxe
 
-3. When the ">" prompt appears, type the following command
+- When the ">" prompt appears, type the following command
 
 .. code::
  
-   db.dropDatabase()
+   > db.dropDatabase()
 
-Press Ctrl+D to exit. Mongo will display 'bye', and then exit. The running process of the development environment is shown in the following graph.
+- Press Ctrl+D to exit. Mongo will display 'bye', and then exit. The running process of the development environment is shown in the following graph.
 
 .. image:: ../_static/clear_mongodb.jpg
      :height: 230
      :align: center 
 
+**2. For demo environment**
+
+- stop rackhd
+.. code::
+
+    vagrant@rackhd:~$ sudo service rackhd stop
+
+- Clean data base by typing the following command
+
+.. code::
+
+   vagrant@rackhd:~$ mongo pxe
+
+- When the ">" prompt appears, type the following command
+
+.. code::
+
+   > db.dropDatabase()
+
+- Press Ctrl+D to exit. Mongo will display ‘bye’, and then exit
+
 Restart RackHD
 ~~~~~~~~~~~~~~
 
-1. Start RackHD again by typing the following command.
+**1. For development environment**
 
-For development environment,
-
-.. code::
-   
-   sudo su
-   pm2 start /home/vagrant/rackhd-pm2-config.yml
-
-For demo environment,
-
-.. code::
-  
-    sudo service rackhd start
-
-2. To use RackHD conveniently, the auth function of RackHD can be closed. Just edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`. Then restart RackHD service.
-
-For development environment,
+- Start RackHD again by typing the following command.
 
 .. code::
 
-   sudo pm2 restart /home/vagrant/rackhd-pm2-config.yml
+    vagrant@rackhd:~$ sudo su
+    root@rackhd:/home/vagrant# pm2 start /home/vagrant/rackhd-pm2-config.yml
 
-For demo environment,
-
-.. code::
-
-   sudo service rackhd restart
-
-
-3. Wait several seconds, and then type the following RackHD restful API to ensure RackHD is started and is running successfully.
+- To use RackHD conveniently, the auth function of RackHD can be closed. Just edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`. Then restart RackHD service.
 
 .. code::
 
-    curl localhost:8080/api/current/nodes
+    root@rackhd:/home/vagrant# pm2 restart /home/vagrant/rackhd-pm2-config.yml
 
-4. The following message appears when RackHD is booting and not ready. The process takes several seconds. You can retry after 10 seconds.
+-  Wait several seconds, and then type the following RackHD restful API to ensure RackHD is started and is running successfully.
+
+.. code::
+
+    root@rackhd:/home/vagrant# curl localhost:8080/api/current/nodes
+
+-  The following message appears when RackHD is booting and not ready. The process takes several seconds. You can retry after 10 seconds.
 
 .. code::
 
   curl: (7) Failed to connect to localhost port 8080: Connection refused
 
-5. When the API returns "[]"(no nodes discovered so far) RackHD software stacks are running successfully.
+-  When the API returns "[]"(no nodes discovered so far) RackHD software stacks are running successfully.
+ 
+**2. For demo environment**
+
+- Start RackHD again by typing the following command.
+
+.. code::
+  
+    vagrant@rackhd:~$ sudo service rackhd start
+
+- To use RackHD conveniently, the auth function of RackHD can be closed. Just edit ``/opt/monorail/config.json``, set 16 line `"authEnabled": true` to `"authEnabled": false`. Then restart RackHD service.
+
+.. code::
+
+   vagrant@rackhd:~$ sudo service rackhd restart
+
+-  Wait several seconds, and then type the following RackHD restful API to ensure RackHD is started and is running successfully.
+
+.. code::
+
+    vagrant@rackhd:~$ curl localhost:8080/api/current/nodes
+
+-  The following message appears when RackHD is booting and not ready. The process takes several seconds. You can retry after 10 seconds.
+
+.. code::
+
+  curl: (7) Failed to connect to localhost port 8080: Connection refused
+
+-  When the API returns "[]"(no nodes discovered so far) RackHD software stacks are running successfully.
 
 Discovery
-------------------
+----------
+Vnode is used to do node discovery. A vnode is defined in the file ``Vagrantfile``. The infrasim/quanta_d51 base box is used to set up a vnode. If you want to learn more about Infrasim, you can go to https://github.com/InfraSIM. UltraVNC Viewer can be used to view the progress of node discovery. In this environment, vnode work in the port ``15901`` instead of ``5901``.
 
 1. set up a vnode
+
+``[Note]`` You need to execute below command in the dirctory which contains ``Vagantfile`` on host.If you are in vagrant box, you need to execute ``exit`` command to exit box and then execute below command. 
 
 .. code::
   
   sudo vagrant up quanta_d51
 
-2. On the Windows desktop, double-click the UltraVNC Viewer, and connect to <IP>:15901,to view the PXE progress to boot the microkernel
+You can execute command on host to check whether quanta_d51 vnode is up successfully. If the status of quanta_d51 vnode is ``running``, quanta_d51 is up successfully.
+
+.. code::
+
+  sudo vagrant status
+
+Iy you are interested in quanta_d51 vnode, you can execute the below command on host to login in quanta_d51 vnode with password: **root**. Then execute the command ``exit`` to enter host.
+
+.. code::
+
+  sudo vagrant ssh quanta_d51
+
+2. On the Windows desktop, double-click the UltraVNC Viewer, and connect to <IP>:15901,to view the PXE progress to boot the microkernel. The <IP> should be set to the node ip where ``quanta_d51 vnode`` is set up by using command **"Vagrant up quanta_d51"**. For example, If you set up environmet on windows, you just need to set <IP> to ``localhost``. If you set up environment on Linux, you just need to get IP by ``ifconfig eth0`` and then replace <IP>.
 
 .. image:: ../_static/node_discovery_1.png
      :height: 300
@@ -144,13 +188,13 @@ Discovery
 
 .. code::
   
-    curl localhost:8080/api/current/nodes 
+    vagrant@rackhd:~$ curl localhost:8080/api/current/nodes 
 
 The output is in json format. If you append 'jq' to the end of the command it will format the output
 
 .. code::
    
-   curl localhost:8080/api/current/nodes | jq '.'
+   vagrant@rackhd:~$ curl localhost:8080/api/current/nodes | jq '.'
 
 You can see one or more enclosure nodes ("type": "enclosure") and computer names ("type": "compute").
 
@@ -161,16 +205,13 @@ You can see one or more enclosure nodes ("type": "enclosure") and computer names
 Node-ID
 -----------------
 
-Node-ID is the unique Identity of a node in RackHD.
-
-1. On the Windows desktop, double-click the mRemoteNG tool to login to RackHD.
-2. List all the compute type nodes being discovered on the rackhd-server SSH console by typing the following command. Append ?type=compute as a query string.
+Node-ID is the unique Identity of a node in RackHD. List all the compute type nodes being discovered on the rackhd-server SSH console by typing the following command. Append ?type=compute as a query string.
 
 You will focus on compute type nodes in this module
 
 .. code::
 
-  curl 127.0.0.1:8080/api/current/nodes?type=compute | jq '.'
+  vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes?type=compute | jq '.'
 
 In the following json output, the compute node ID is ``58b660116d20657f0c5d6466``. You will demote it as a variable named <node_id> in the following module.
 
@@ -180,7 +221,7 @@ Do not use the example ``58b660116d20657f0c5d6466`` in your vLab. Use the displa
 
 
 Retrieve catalogs
---------------------------
+-----------------
 
 Catalogs are described as the following:
 
@@ -209,20 +250,20 @@ Examples of catalog sources include the following:
 
 .. code::
    
-    curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/ | jq '.' | grep source
+    vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/ | jq '.' | grep source
 
 
 2. Select one of the sources you are interested in, and then append to the command. For example, the following example use ipmi-fru
 
 .. code::
 
-   curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/ipmi-fru | jq '.'
+   vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/ipmi-fru | jq '.'
 
 or "driveId" as example
 
 .. code::
 
-   curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/driveId | jq '.'
+   vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/driveId | jq '.'
 
 .. image:: ../_static/catalog_info.png
      :height: 300
@@ -265,7 +306,7 @@ To talk with BMC, RackHD must be configured with the the BMC IP and credentials.
 
 .. code::
  
-   curl localhost:8080/api/current/nodes/<node_id>/catalogs/bmc | jq '.' | grep "IP Address"
+   vagrant@rackhd:~$ curl localhost:8080/api/current/nodes/<node_id>/catalogs/bmc | jq '.' | grep "IP Address"
 
 2. In the following example, the BMC IP is 172.31.128.23. and it will be the value of <BMC_IP> variable in next step.
 
@@ -281,7 +322,7 @@ To talk with BMC, RackHD must be configured with the the BMC IP and credentials.
 
 .. code::
    
-   curl -k -X PUT -H 'Content-Type: application/json' -d '{ "nodeId": "<node-id>", "service": "ipmi-obm-service", "config": { "user": "admin", "password": "admin", "host": "<BMC-IP>" } }' localhost:8080/api/2.0/obms
+   vagrant@rackhd:~$ curl -k -X PUT -H 'Content-Type: application/json' -d '{ "nodeId": "<node-id>", "service": "ipmi-obm-service", "config": { "user": "admin", "password": "admin", "host": "<BMC-IP>" } }' localhost:8080/api/2.0/obms
 
 4. Once the OBM credentials have been configured, RackHD can communicate with BMC in workflows (e.g. power-cycle the BMC or retrieve poller data)
 
@@ -296,7 +337,7 @@ Retrieve Pollers
 
 .. code::
 
-  curl 127.0.0.1:8080/api/current/pollers| jq '.'
+  vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/pollers| jq '.'
 
 
 Below is a definition of each field in the example output below:
@@ -330,13 +371,13 @@ data.
 
 .. code::
  
-  curl 127.0.0.1:8080/api/current/pollers/<poller_id>/data | jq '.' 
+  vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/pollers/<poller_id>/data | jq '.' 
 
 3. Change the interval of a poller, by typing the following command.
 
 .. code::
 
- curl -X PATCH -H 'Content-Type: application/json' -d '{"pollInterval":15000}' 127.0.0.1:8080/api/current/pollers/<poller_id>
+ vagrant@rackhd:~$ curl -X PATCH -H 'Content-Type: application/json' -d '{"pollInterval":15000}' 127.0.0.1:8080/api/current/pollers/<poller_id>
 
 .. image:: ../_static/pollers_info.png
      :height: 350

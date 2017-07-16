@@ -14,9 +14,7 @@ prerequisites
 
     Another option that can provide the same pretty printing is use::
 
-        | python -m json.tool
-
-    which can also be used with a pager, such as `less`.
+        | python -mjson.tool
 
 You will need to have `Vagrant`_ (>=1.8.1) and `VirtualBox`_ (4.3.x) installed on your machine to use
 this tutorial. The 5.1.X `VirtualBox`_ has some problems. So, you are not suggested installing 5.1.x `VirtualBox`_.
@@ -78,7 +76,7 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 
    .. image :: ../_static/invisible.png
 
-1. Demo environment set up
+**1. Demo environment set up**
 
 - Clone the RackHD repository
 
@@ -89,13 +87,15 @@ There are two kinds of vagrant-based environment. One is used for demo and anoth
 
 - Edit the Vagrantfile 
   
+  add ``target.vm.box_version = "2.2.0"`` in line 12.
+
+  add ``target.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"`` in line 78.
+
   change the line 79:'sudo service isc-dhcp-server start' to 'sudo service isc-dhcp-server restart'
 
   change the line 89: 'v.gui = true' to 'v.gui = false'
 
-  add ``target.vm.box_version = "2.2.0"`` in line 12.
-
-[**Note**] version must be 2.* and the version can be searched in https://app.vagrantup.com/rackhd/boxes/rackhd
+  [**Note**] version must be 2.* and the version can be searched in https://app.vagrantup.com/rackhd/boxes/rackhd
  
   
 
@@ -118,7 +118,7 @@ If RackHD is set up successfully, the result will be shown as follows.
      :height: 130
      :align: center
 
-2. Development environment set up
+**2. Development environment set up**
 
 - Clone the RackHD repository
 
