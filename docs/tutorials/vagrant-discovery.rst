@@ -194,7 +194,6 @@ The output is in json format. If you append 'jq' to the end of the command it wi
 You can see one or more enclosure nodes ("type": "enclosure") and computer names ("type": "compute").
 
 .. image:: ../_static/curl_nodes_info.png
-    :height: 500
     :align: center
  
 Node-ID
@@ -261,7 +260,6 @@ or "driveId" as example
    vagrant@rackhd:~$ curl 127.0.0.1:8080/api/current/nodes/<node_id>/catalogs/driveId | jq '.'
 
 .. image:: ../_static/catalog_info.png
-     :height: 300
      :align: center
 
 Retrieve Pollers
@@ -308,7 +306,6 @@ To talk with BMC, RackHD must be configured with the the BMC IP and credentials.
 .. code::
 
 .. image:: ../_static/set_bmc_ip.png
-   :height: 50
    :align: center
 
 3. Include the BMC IP (it should be 172.31.128.xx , the DHCP from rackhd-server) in the following command, to set an IPMI OBM setting on a node.
@@ -322,7 +319,6 @@ To talk with BMC, RackHD must be configured with the the BMC IP and credentials.
 4. Once the OBM credentials have been configured, RackHD can communicate with BMC in workflows (e.g. power-cycle the BMC or retrieve poller data)
 
 .. image:: ../_static/obm_setting.png
-     :height: 100
      :align: center
 
 Retrieve Pollers
@@ -375,7 +371,6 @@ data.
  vagrant@rackhd:~$ curl -X PATCH -H 'Content-Type: application/json' -d '{"pollInterval":15000}' 127.0.0.1:8080/api/current/pollers/<poller_id>
 
 .. image:: ../_static/pollers_info.png
-     :height: 350
      :align: center
 
 

@@ -24,7 +24,6 @@ Before the following operations are excuted, you need to ssh the vagrant box fir
   vagrant@rackhd:~$ curl localhost:8080/api/current/nodes/<Node-ID>/workflows | jq '.'
 
 .. image:: ../_static/node_workflow.png
-     :height: 330
      :align: center
 
 **REST API ( v 2.0) - Get active workflow**
@@ -36,7 +35,6 @@ Before the following operations are excuted, you need to ssh the vagrant box fir
 In the following example, the return is blank ([]), which means no workflow is actively running on this node.
 
 .. image:: ../_static/active_workflow.png
-     :height: 100
      :align: center
 
 **REST API ( v 2.0) - Show RackHD configurations**
@@ -48,7 +46,6 @@ Show the RackHD configurations, by running the following command.
  vagrant@rackhd:~$ curl localhost:8080/api/2.0/config | jq '.'
 
 .. image:: ../_static/config_file.png
-     :height: 370
      :align: center
 
 **REST API ( v 2.0) - lookup table**
@@ -60,7 +57,6 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
   vagrant@rackhd:~$ curl localhost:8080/api/current/lookups | jq '.'
 
 .. image:: ../_static/lookup_info.png
-   :height: 270
    :align: center
 
 **REST API ( v 2.0) - build-in workflow**
@@ -74,7 +70,6 @@ Dump the IP address in the lookup table (where RackHD maintain the nodes IP), by
 As below output example, you will find lots of handy build-in workflow which RackHD carries, which you can leverage them directly.
 
 .. image:: ../_static/built-in-workflow.png
-     :height: 330
      :align: center
 
 **REST API ( v 2.0) - issue a workflow**
@@ -90,7 +85,6 @@ In the following example, to post a workflow to Reset a Note, the Node_id is obt
 Then the vNode is powered cycle and rebooted.
 
 .. image:: ../_static/issue_workflow.png
-     :height: 330
      :align: center
 
 **Redfish API - Chassis**
@@ -103,7 +97,6 @@ List the Chassis that is managed by RackHD (equivalent to the enclosure node in 
 
 
 .. image:: ../_static/redfish_chasis.png
-     :height: 210
      :align: center
 
 **Redfish API - System**
@@ -118,7 +111,6 @@ List the Chassis that is managed by RackHD (equivalent to the enclosure node in 
 
 
 .. image:: ../_static/redfish_sys.png
-     :height: 210
      :align: center
 
 **Redfish API - SEL Log**
@@ -130,7 +122,6 @@ List the SEL Log (System-ID is obtained in the previous step) by running the fol
    vagrant@rackhd:~$ curl 127.0.0.1:8080/redfish/v1/systems/<System-ID>/LogServices/Sel| jq '.'
 
 .. image:: ../_static/redfish_sel.png
-     :height: 290
      :align: center
 
 **Redfish API - CPU info**
@@ -144,7 +135,6 @@ Right-click, to paste the System-ID that you copied in a previous step.
   vagrant@rackhd:~$ curl 127.0.0.1:8080/redfish/v1/Systems/<System-ID>/Processors/0| jq '.'
 
 .. image:: ../_static/redfish_cpu.png
-     :height: 330
      :align: center
 
 **Redfish API - helper**
@@ -156,7 +146,6 @@ Show the list of RackHD Redfish APIs' by running below command:
   vagrant@rackhd:~$ curl 127.0.0.1:8080/redfish/v1| jq '.'
 
 .. image:: ../_static/redfish_helper.png
-     :height: 330
      :align: center
 
 Swagger UI
@@ -171,7 +160,6 @@ The following steps provide an overview of how to use the Swagger UI.
 3. Click /api/2.0 > /redfish/v1, to expand the API list.
 
 .. image:: ../_static/swagger-ui.png
-     :height: 250
      :align: center
 
 4. Get a Node ID by scrolling down the /API 2.0 list and clicking the "/nodes" API.
@@ -185,7 +173,6 @@ The details for this API are displayed (for example, description, parameters, re
 Notes: Some APIs do not require parameters. Some APIs require that you specify a unique Node ID or other parameters. Enter any necessary parameters and Swagger UI builds the RESTful API request and sends it when you click **Try it Out**.
 
 .. image:: ../_static/try_it_out.png
-     :height: 540
      :align: center
 
 7. The RackHD response is displayed. The Response Body is output in a json format from RackHD and is exactly the same as the return from command line API.
@@ -193,7 +180,6 @@ Notes: Some APIs do not require parameters. Some APIs require that you specify a
 8. Copy a node ID with the type "compute", instead of "enclosure".
 
 .. image:: ../_static/try_it_out_2.png
-     :height: 510
      :align: center
 
 9. From the API list, under /nodes API, find /nodes/{identifier}/catalogs, and then click the **"Get the catalogs fro a node"**.
@@ -206,7 +192,6 @@ Notes: Some APIs do not require parameters. Some APIs require that you specify a
 12. Experiment with other APIs.
 
 .. image:: ../_static/try_it_out_3.png
-     :height: 300
      :align: center
 
 
