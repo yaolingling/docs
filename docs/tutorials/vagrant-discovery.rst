@@ -59,7 +59,6 @@ RackHD uses a Mongo database for storing static data such as catalog information
 - Press Ctrl+D to exit. Mongo will display 'bye', and then exit. The running process of the development environment is shown in the following graph.
 
 .. image:: ../_static/clear_mongodb.jpg
-     :height: 230
      :align: center 
 
 **2. For demo environment**
