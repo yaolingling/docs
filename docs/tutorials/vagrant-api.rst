@@ -193,5 +193,3 @@ Notes: Some APIs do not require parameters. Some APIs require that you specify a
 
 .. image:: ../_static/try_it_out_3.png
      :align: center
-
-
