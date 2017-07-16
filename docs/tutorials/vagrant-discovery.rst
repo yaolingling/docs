@@ -169,17 +169,14 @@ Iy you are interested in quanta_d51 vnode, you can execute the below command on 
 2. On the Windows desktop, double-click the UltraVNC Viewer, and connect to <IP>:15901,to view the PXE progress to boot the microkernel. The <IP> should be set to the node ip where ``quanta_d51 vnode`` is set up by using command **"Vagrant up quanta_d51"**. For example, If you set up environmet on windows, you just need to set <IP> to ``localhost``. If you set up environment on Linux, you just need to get IP by ``ifconfig eth0`` and then replace <IP>.
 
 .. image:: ../_static/node_discovery_1.png
-     :height: 300
      :align: center
 
 .. image:: ../_static/node_discovery_2.png
-     :height: 300
      :align: center
 
 3. The vNode console pauses for 1 minute, to catalog the node data on this server. After the microkernel boot is completed, the vNode reboots. This reboot indicates that the discovery workflow is completed.
 
 .. image:: ../_static/node_discovery_finish.png
-     :height: 300
      :align: center
 
 4.Retrieve the nodes by typing the following RackHD API to discover the node.
