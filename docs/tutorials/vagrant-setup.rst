@@ -185,7 +185,7 @@ If you want to set up development environment, get code from: https://github.com
 
 **step 3:  Right mouse click the folder where Vagrantfile lives, to launch “git bash here”**
 
-.. image:: ../_static/git_bash_here.png:
+.. image:: ../_static/git_bash_here.png
      :align: center
 
 **step 4:  In “Git Bash”**

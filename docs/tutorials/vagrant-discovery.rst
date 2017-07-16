@@ -24,7 +24,6 @@ servers, and the virtual nodes are already discovered by RackHD. In this module,
 RackHD and clean up the database so RackHD is forced to discover those nodes again.
 
 .. image:: ../_static/node_discovery.png
-     :height: 230
      :align: center
 
 
