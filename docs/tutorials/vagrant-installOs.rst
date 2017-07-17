@@ -22,7 +22,6 @@ Prerequisite
   vagrant@rackhd:~$ curl http://localhost:8080/api/current/catalogs | jq '.' | grep D51 -B8 | grep node
 
 .. image:: ../_static/node_info.png
-     :height: 250
      :align: center
    
     
@@ -98,7 +97,6 @@ In this step, you will create a payload file, and then leverage the RackHD build
 
 
 .. image:: ../_static/wget_iso.png
-   :height: 220
    :align: center
 
 2. Modify the payload json file by using vim.
@@ -149,5 +147,4 @@ In the json output RackHD responses, you will see "_status" field is "running", 
 You can move on the guide or revisit previous sessions, then go back after 4~5 minutes .
 
 .. image:: ../_static/install_os_process.png
-   :height: 450
    :align: center 

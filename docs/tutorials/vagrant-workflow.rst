@@ -42,7 +42,6 @@ Step 2: Configure on-web-ui
 6. click "apply settings" button on the bottom.
 
 .. image:: ../_static/workflow_UI.png
-     :height: 430
      :align: center
 
 Step 3: Try on-web-ui
@@ -53,13 +52,11 @@ Step 3: Try on-web-ui
 3. You can view the workflow history in the table.
 
 .. image:: ../_static/workflow_op1.png
-     :height: 270
      :align: center
 
 4. Click a compute node in the Node List.
 
 .. image:: ../_static/workflow_op2.png
-     :height: 185
      :align: center
 
 5. In the right panel, you can view the different APIs that are available, such as pollers, catalogs, and so on.
@@ -67,13 +64,11 @@ Step 3: Try on-web-ui
 6. Experiment with the catalog of a node by clicking the "Catalogs" button.
 
 .. image:: ../_static/workflow_op3.png
-     :height: 280
      :align: center
 
 7. Try one of the catalogs link shown in the available catalogs list. Example: click "SMART" to show the Disks S.M.A.R.T information captured on the node.
 
 .. image:: ../_static/workflow_op4.png
-     :height: 590
      :align: center
 
 8. Click the "Operations Center" icon on the left panel
@@ -83,7 +78,6 @@ Step 3: Try on-web-ui
 10. Click one the the workflow (example: "Discovery") to view the workflow diagram and status.
 
 .. image:: ../_static/workflow_op5.png
-     :height: 200
      :align: center
 
 
@@ -119,13 +113,11 @@ Add a new workflow
 3. Press Enter on your keyboard. Do not use the Save button on the right.
 
 .. image:: ../_static/workflow_op6.png
-     :height: 330
      :align: center
 
 4. On the pop up Confirm diagram, click "SUBMIT"
 
 .. image:: ../_static/workflow_op7.png
-     :height: 130
      :align: center
 
 The Web-UI refreshes itself.
@@ -135,7 +127,6 @@ The Web-UI refreshes itself.
 6. Type My_Workflow on the name box. The name is auto-populated. You can select the workflow you created.
 
 .. image:: ../_static/workflow_op8.png
-     :height: 320
      :align: center
 
 The on-web-ui will show there's a dummy operation (no-op) in this workflow.
@@ -145,7 +136,6 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
 8. Drag and drop from left to right to move the view point.
 
 .. image:: ../_static/workflow_op9.png
-     :height: 120
      :align: center
 
 9. On the right side, above the panel that displays the workflow source code, in the Task field, type **Set Node Pxeboot**, to select an existing task.
@@ -153,7 +143,6 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
 10. Click the + button, to add the task to your customized workflow.
 
 .. image:: ../_static/workflow_op10.png
-     :height: 200
      :align: center
 
 11. Then a piece of workflow source code(json) will be appended into your workflow code .
@@ -163,13 +152,11 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
 13. To make the name more readable, please change the label name from "new-task-xxxxxx" to **"set-boot-pxe"** (by clicking the string on the box then you can edit it.)
 
 .. image:: ../_static/workflow_op11.png
-     :height: 300
      :align: center
 
 14. As below example, the newly added box has been renamed to **set-boot-pxe**.
 
 .. image:: ../_static/workflow_op12.png
-     :height: 295
      :align: center
 
 15. Select the existing task Reboot Node.
@@ -179,7 +166,6 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
 17. Change the box name from random generated string to reboot.
 
 .. image:: ../_static/workflow_op13.png
-     :height: 420
      :align: center
 
 ``[Note]`` Besides, you need to edit the code block of **Reboot**, as is shown in the picture above.  
@@ -191,7 +177,6 @@ The on-web-ui will show there's a dummy operation (no-op) in this workflow.
 20. Change the newly added box name to boostrap-ubuntu
 
 .. image:: ../_static/workflow_op14.png
-     :height: 290
      :align: center
 
 customize a Shell Command Task
@@ -202,13 +187,11 @@ customize a Shell Command Task
 2. Click the + button.
 
 .. image:: ../_static/workflow_op15.png
-     :height: 125
      :align: center
 
 3. Change the new task's name to Diagnostic by clicking the name on the box.
 
 .. image:: ../_static/workflow_op16.png
-     :height: 95
      :align: center
 
 4. In the workflow editor window on the right hand side, you can see three default shell commands for the Diagnostic task that you created.
@@ -239,7 +222,6 @@ The following example shows the default, automatically generated, json output.
   ]
 
 .. image:: ../_static/workflow_op17.png
-     :height: 495
      :align: center
 
 Set the task relationship
@@ -258,7 +240,6 @@ For example, when you connect the green condition indicator of task A to the tri
 1. Connect the green condition indicator of the set-boot-pxe task to the trigger indicator of the reboot task: whether the set-boot-pxe task is successful or not, the reboot task is triggered
 
 .. image:: ../_static/workflow_op19.png
-     :height: 180
      :align: center
 
 2. Connect the green condition indicator of the reboot task to the trigger indicator of the bootstrap-ubuntu task.
@@ -268,13 +249,11 @@ When the reboot task is successfully completed, the bootstrap-ubuntu task is sta
 Note: Use your mouse wheel to zoom in and zoom out on the view. Drag and drop from left to right to move the view point.
 
 .. image:: ../_static/workflow_op20.png
-     :height: 180
      :align: center
 
 3. Click x to remove the no-op task.
 
 .. image:: ../_static/workflow_op21.png
-     :height: 120
      :align: center
 
 4. Connect the green condition indicator for the reboot task to the trigger indicator for the Diagnostic task.
@@ -282,7 +261,6 @@ Note: Use your mouse wheel to zoom in and zoom out on the view. Drag and drop fr
 5. View your new workflow.
 
 .. image:: ../_static/workflow_op22.png
-     :height: 150
      :align: center
 
 Save the workflow
@@ -291,7 +269,6 @@ Save the workflow
 1. Click the save icon to save the workflow
 
 .. image:: ../_static/workflow_op23.png
-     :height: 100
      :align: center
 
 
@@ -301,7 +278,6 @@ Step 5: Run the new workflow
 Click the run icon, to run the workflow that you created in 7.5.4. 
 
 .. image:: ../_static/workflow_op24.png
-     :height: 100
      :align: center
 
 
@@ -312,7 +288,6 @@ On the pop up diagram,
 2. Click **SAVE** to run this workflow
 
 .. image:: ../_static/workflow_op25.png
-     :height: 100
      :align: center
 
 3. On the desktop, double-click the UltraVNC Viewer tool, to check the bootstrap progress of the node you sent this workflow to.
@@ -322,5 +297,4 @@ On the pop up diagram,
 5. Click the running My_Workflow, to view the progress. After several minutes, the workflow is completed, and the color of the workflow indicates the running result (red for fail, yellow for canceled, green for success).
 
 .. image:: ../_static/workflow_op26.png
-     :height: 250
      :align: center 
