@@ -50,7 +50,7 @@ For development environment,
 .. code::
 
     vagrant@rackhd:~$ sudo su
-    root@rackhd:/home/vagrant# mkdir iso && iso
+    root@rackhd:/home/vagrant# mkdir iso && cd iso
     root@rackhd:/home/vagrant# mkdir -p /var/mirrors/Photon
     root@rackhd:/home/vagrant# mkdir -p /home/vagrant/src/on-http/static/http/mirrors/
 
@@ -59,7 +59,7 @@ For demo environment,
 .. code::
    
      vagrant@rackhd:~$ sudo su
-     root@rackhd:/home/vagrant# mkdir iso && iso
+     root@rackhd:/home/vagrant# mkdir iso && cd iso
      root@rackhd:/home/vagrant# mkdir -p /var/mirrors/Photon
      root@rackhd:/home/vagrant# mkdir -p /var/renasar/on-http/static/http/mirrors/
    
